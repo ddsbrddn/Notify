@@ -2,7 +2,7 @@ class ForumThreadsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
 
   def index
-    @forum_threads = ForumThread.all
+    @forum_threads = ForumThread.all.order('created_at DESC')
   end
 
   def show
@@ -10,11 +10,11 @@ class ForumThreadsController < ApplicationController
   end
 
   def new
-    @forum_thread = ForumThread.new
+    @forum_thread = current_user.forum_threads.build
   end
 
   def create
-    @forum_thread = ForumThread.new(forum_thread_params)
+    @forum_thread = current_user.forum_threads.build(forum_thread_params)
 
     if @forum_thread.save
       redirect_to @forum_thread

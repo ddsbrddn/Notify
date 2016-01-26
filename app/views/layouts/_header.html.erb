@@ -2,15 +2,28 @@
   <div class="container">
     <%= link_to "Notify", root_path, id: "logo" %>
     <nav>
-      <ul class="nav navbar-nav navbar-right">
-          <li><%= link_to "Threads", forum_threads_path %></li>
-        <% if user_signed_in? %>
-          <li><%= link_to "New Thread", new_forum_thread_path %></li>
-          <li><%= link_to "Log out", destroy_user_session_path %></li>
-        <% else %>
-          <li><%= link_to "Sign up", new_user_registration_path %></li>
-          <li><%= link_to "Log in", new_user_session_path %></li>
-        <% end %>
+      <ul class="nav navbar-nav navbar-left">
+        <li><%= link_to "Threads", forum_threads_path %></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">                  <% if user_signed_in? %>
+        <li class="nav-item btn-group" data-behavior="notifications" data-notifications='<%= render template: "notifications/index", formats: [:json] %>'>
+          <a class="dropdown-toggle nav-link" type="button" data-behavior="notifications-link" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <span class="glyphicon glyphicon-bell"></span> <span data-behavior="unread-count"></span>
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenu1" data-behavior="notification-items">
+            <!--
+            <a class="dropdown-item" href="#">Action</a>
+            <a class="dropdown-item" href="#">Another action</a>
+            <a class="dropdown-item" href="#">Something else here</a>
+            -->
+          </ul>
+        </li>
+        <li><%= link_to "New Thread", new_forum_thread_path %></li>
+        <li><%= link_to "Log out", destroy_user_session_path %></li>
+      <% else %>
+        <li><%= link_to "Sign up", new_user_registration_path %></li>
+        <li><%= link_to "Log in", new_user_session_path %></li>
+      <% end %>
       </ul>
     </nav>
   </div>
