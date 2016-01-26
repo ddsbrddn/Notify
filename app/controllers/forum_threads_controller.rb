@@ -1,4 +1,5 @@
 class ForumThreadsController < ApplicationController
+  before_action :authenticate_user!, except: [:index, :show]
 
   def index
     @forum_threads = ForumThread.all
@@ -43,7 +44,7 @@ class ForumThreadsController < ApplicationController
     redirect_to forum_threads_path
   end
 
-      
+
   private
 
     def forum_thread_params
