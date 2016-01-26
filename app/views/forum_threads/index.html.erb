@@ -1,7 +1,5 @@
-<%= link_to "New Thread", new_forum_thread_path %>
+<% provide(:title) %>
 
 <% @forum_threads.each do |forum_thread| %>
-  <h2><%= forum_thread.title %></h2>
+  <h2><%= link_to forum_thread.title, forum_thread_path(forum_thread) %></h2>
 <% end %>
-
-<%= link_to "Home", root_path %>

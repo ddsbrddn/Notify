@@ -1,13 +1,25 @@
 <%= form_for @forum_thread do |f| %>
+  <% if @forum_thread.errors.any? %>
+    <div id="errors">
+      <h2>
+        <%= pluralize(@forum_thread.errors.count, "error") %> prohibited this thread from being saved:
+        <ul>
+          <% @forum_thread.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </h2>
+    </div>
+  <% end %>
   <p>
     <%= f.label :title %>
-    <%= f.text_field :title %>
+    <%= f.text_field :title, class: "form-control" %>
   </p>
   <p>
     <%= f.label :body %>
-    <%= f.text_area :body %>
+    <%= f.text_area :body, class: "form-control" %>
   </p>
   <p>
-    <%= f.submit %>
+    <%= f.submit "Create Thread", class: "btn btn-primary" %>
   </p>
 <% end %>

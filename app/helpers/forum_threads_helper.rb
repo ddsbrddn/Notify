@@ -1,2 +1,2 @@
-module ForumThreadsHelper
+module ForumThreadsHelper  
 end
