@@ -1,8 +1,38 @@
-<p>
-  <h2><%= @forum_thread.title %></h2>
-</p>
-<p>
-  <%= @forum_thread.body %>
-</p>
+<div class="main-content">
+  <h1><%= @forum_thread.title %></h1>
 
-<%= link_to "Back to Threads", forum_threads_path %> 
+  <p>
+    <%= @forum_thread.body %>
+  </p>
+
+  <div class="posts">
+    <% @forum_thread.posts.each do |post| %>
+      <p><strong><%= post.poster %></strong></p>
+      <p><%= post.body %></p>
+    <% end %>
+  </div>
+</div>
+
+<%= form_for([@forum_thread, @forum_thread.posts.build]) do |f| %>
+  <div class="form-group">
+    <%= f.label :poster %>
+    <%= f.text_field :poster, class: "form-control"  %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :body %>
+    <%= f.text_area :body, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.submit "Submit Post", class: "btn btn-primary" %>
+  </div>
+<% end %>
+
+<div class="input-group">
+  <div class="input-group-btn">
+    <%= link_to "Back to Threads", forum_threads_path, class: "btn btn-default" %>
+    <%= link_to "Edit", edit_forum_thread_path, class: "btn btn-default" %>
+    <%= link_to "Delete", forum_thread_path, class: "btn btn-default", method: :delete, data: { confirm: "Are you sure?" } %>
+  </div>
+</div>

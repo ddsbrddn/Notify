@@ -22,7 +22,28 @@ class ForumThreadsController < ApplicationController
     end
   end
 
+  def edit
+    @forum_thread = ForumThread.find(params[:id])
+  end
 
+  def update
+    @forum_thread = ForumThread.find(params[:id])
+
+    if @forum_thread.update(forum_thread_params)
+      redirect_to @forum_thread
+    else
+      render 'edit'
+    end
+  end
+
+  def destroy
+    @forum_thread = ForumThread.find(params[:id])
+    @forum_thread.destroy
+
+    redirect_to forum_threads_path
+  end
+
+      
   private
 
     def forum_thread_params
