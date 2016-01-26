@@ -1,0 +1,7 @@
+<%= link_to "New Thread", new_forum_thread_path %>
+
+<% @forum_threads.each do |forum_thread| %>
+  <h2><%= forum_thread.title %></h2>
+<% end %>
+
+<%= link_to "Home", root_path %>
