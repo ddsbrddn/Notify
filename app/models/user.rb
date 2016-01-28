@@ -7,4 +7,5 @@ class User < ActiveRecord::Base
   has_many :notifications, foreign_key: :recipient_id
   has_many :forum_threads
   has_many :posts
+  validates :name, presence: true
 end

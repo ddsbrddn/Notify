@@ -1,5 +1,5 @@
 <div class="main-content">
-  <h1><%= @forum_thread.title %><small> by: <%= @forum_thread.user.email %></small></h1>
+  <h1><%= @forum_thread.title %><small> by: <%= @forum_thread.user.name %></small></h1>
 
   <p>
     <%= @forum_thread.body %>
@@ -7,7 +7,7 @@
 
   <div class="posts">
     <% @forum_thread.posts.each do |post| %>
-      <p><strong><%= post.user.email %></strong></p>
+      <p><strong><%= post.user.name %></strong></p>
       <p>
         <%= post.body %> |
         <%= link_to 'Destroy Post', [post.forum_thread, post],

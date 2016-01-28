@@ -19,7 +19,8 @@
           </ul>
         </li>
         <li><%= link_to "New Thread", new_forum_thread_path %></li>
-        <li><%= link_to "Log out", destroy_user_session_path %></li>
+        <li><%= link_to "Log out", destroy_user_session_path, :method => :delete %></li>
+        <li><%= link_to current_user.name, edit_user_registration_path %></li>
       <% else %>
         <li><%= link_to "Sign up", new_user_registration_path %></li>
         <li><%= link_to "Log in", new_user_session_path %></li>
