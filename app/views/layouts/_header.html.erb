@@ -1,4 +1,4 @@
-<header class="main_header navbar navbar-fixed-top">
+<header class="navbar navbar-fixed-top main_header">
   <div class="container">
     <%= link_to "Notify", root_path, id: "logo" %>
     <nav>
@@ -23,7 +23,7 @@
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <%= current_user.name %> <b class="caret"></b>
             </a>
-            <ul class="dropdown-menu">              
+            <ul class="dropdown-menu">
               <li><%= link_to "Setting", edit_user_registration_path(current_user) %></li>
               <li class="divider"></li>
               <li>
