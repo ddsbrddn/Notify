@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   get 'notifications/index'
 
   devise_for :users
-  
+
   resources :forum_threads do
     resources :posts
   end
@@ -14,5 +14,5 @@ Rails.application.routes.draw do
     end
   end
 
-  root 'static_pages#home'
+  root 'forum_threads#index'
 end

@@ -1,5 +1,11 @@
 <% provide(:title) %>
-
-<% @forum_threads.each do |forum_thread| %>
-  <h2><%= link_to forum_thread.title, forum_thread_path(forum_thread) %></h2>
-<% end %>
+<div id="posts">
+  <% @forum_threads.each do |forum_thread| %>
+  <div class="post">
+    <h2 class="title"><%= link_to forum_thread.title, forum_thread_path(forum_thread) %></h2>
+    <p class="date">
+      Published at <%= time_ago_in_words(forum_thread.created_at) %> ago by <%= forum_thread.user.name %>
+    </p>
+  </div>
+  <% end %>
+</div>
