@@ -1,14 +1,14 @@
 <%= form_for @forum_thread do |f| %>
   <% if @forum_thread.errors.any? %>
-    <div id="errors">
-      <h2>
+    <div id="error_explanation">
+      <div class="alert alert-danger">
         <%= pluralize(@forum_thread.errors.count, "error") %> prohibited this thread from being saved:
-        <ul>
-          <% @forum_thread.errors.full_messages.each do |msg| %>
+      </div>
+      <ul>
+        <% @forum_thread.errors.full_messages.each do |msg| %>
           <li><%= msg %></li>
-          <% end %>
-        </ul>
-      </h2>
+        <% end %>
+      </ul>
     </div>
   <% end %>
   <div class="form-group">

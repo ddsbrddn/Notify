@@ -2,7 +2,7 @@ class ForumThreadsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
 
   def index
-    @forum_threads = ForumThread.all.order('created_at DESC')
+    @forum_threads = ForumThread.paginate(page: params[:page])
   end
 
   def show

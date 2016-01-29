@@ -28,10 +28,10 @@
       <% end %>
     </div>
 </div>
-
+<br>
 <%= form_for([@forum_thread, @forum_thread.posts.build]) do |f| %>
   <div class="form-group">
-    <%= f.label :body %>
+    <%= f.label :body, 'Post Reply' %>
     <%= f.text_area :body, class: "form-control" %>
   </div>
 
