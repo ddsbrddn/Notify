@@ -1,8 +1,9 @@
 class ForumThreadsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
+  before_action :require_permission, only: [:edit, :destroy]
 
   def index
-    @forum_threads = ForumThread.paginate(page: params[:page])
+    @forum_threads = ForumThread.paginate(page: params[:page]).order('id DESC')
   end
 
   def show
@@ -30,7 +31,7 @@ class ForumThreadsController < ApplicationController
   def update
     @forum_thread = ForumThread.find(params[:id])
 
-    if @forum_thread.update(forum_thread_params)
+    if current_user.forum_thread.update(forum_thread_params)
       redirect_to @forum_thread
     else
       render 'edit'
@@ -49,5 +50,12 @@ class ForumThreadsController < ApplicationController
 
     def forum_thread_params
       params.require(:forum_thread).permit(:title, :body)
+    end
+
+    def require_permission
+      if current_user != ForumThread.find(params[:id]).user
+        redirect_to forum_thread_path
+        flash[:danger] = "You don't have permission to edit or delete this thread"
+      end
     end
 end

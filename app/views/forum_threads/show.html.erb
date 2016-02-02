@@ -40,6 +40,7 @@
   </div>
 <% end %>
 
+<% if current_user == @forum_thread.user %>
 <div class="input-group">
   <div class="input-group-btn">
     <%= link_to "Back to Threads", forum_threads_path, class: "btn btn-default" %>
@@ -47,3 +48,4 @@
     <%= link_to "Delete", forum_thread_path(@forum_thread), class: "btn btn-default", method: :delete, data: { confirm: "Are you sure?" } %>
   </div>
 </div>
+<% end %>

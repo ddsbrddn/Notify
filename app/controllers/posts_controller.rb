@@ -1,5 +1,6 @@
 class PostsController < ApplicationController
   before_action :authenticate_user!
+  before_action :corrent_user, only: :destroy
 
   def create
     @forum_thread = ForumThread.find(params[:forum_thread_id])
@@ -22,6 +23,7 @@ class PostsController < ApplicationController
     @forum_thread = ForumThread.find(params[:forum_thread_id])
     @post = @forum_thread.posts.find(params[:id])
     @post.destroy
+    flash[:success] = "Post deleted"
     redirect_to forum_thread_path(@forum_thread)
   end
 
@@ -29,5 +31,9 @@ class PostsController < ApplicationController
   private
     def post_params
       params.require(:post).permit(:body)
+    end
+
+    def corrent_user
+      @post = current_user.post.find_by(id: params[:id])
     end
 end
