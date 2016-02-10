@@ -7,7 +7,7 @@ class ForumThreadsController < ApplicationController
   end
 
   def show
-    @forum_thread = ForumThread.find(params[:id])
+    @forum_thread = ForumThread.friendly.find(params[:id])
   end
 
   def new
@@ -25,13 +25,13 @@ class ForumThreadsController < ApplicationController
   end
 
   def edit
-    @forum_thread = ForumThread.find(params[:id])
+    @forum_thread = ForumThread.friendly.find(params[:id])
   end
 
   def update
-    @forum_thread = ForumThread.find(params[:id])
+    @forum_thread = ForumThread.friendly.find(params[:id])
 
-    if current_user.forum_thread.update(forum_thread_params)
+    if @forum_thread.update(forum_thread_params)
       redirect_to @forum_thread
     else
       render 'edit'
@@ -39,7 +39,7 @@ class ForumThreadsController < ApplicationController
   end
 
   def destroy
-    @forum_thread = ForumThread.find(params[:id])
+    @forum_thread = ForumThread.friendly.find(params[:id])
     @forum_thread.destroy
 
     redirect_to forum_threads_path
@@ -53,7 +53,7 @@ class ForumThreadsController < ApplicationController
     end
 
     def require_permission
-      if current_user != ForumThread.find(params[:id]).user
+      if current_user != ForumThread.friendly.find(params[:id]).user
         redirect_to forum_thread_path
         flash[:danger] = "You don't have permission to edit or delete this thread"
       end
